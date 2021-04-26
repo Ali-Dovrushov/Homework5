@@ -6,12 +6,10 @@ namespace Question11FromHomework4
     {
 
         public static int personTryAge;
-        public static int secondPersonTryAge;
+        public static bool checkerFirstPerson = true;
 
         static string PersonName()
         {
-            bool checkerFirstPerson = true;
-
             do
             {
                 string personName = Convert.ToString(Console.ReadLine());
@@ -23,7 +21,7 @@ namespace Question11FromHomework4
                     if (!Char.IsLetter(element))
                     {
                         checkerFirstPerson = false;
-                        Console.WriteLine("Incorrect name type, please enter correct name\n");
+                        Console.Write("Incorrect name type, please enter correct name: ");
                         break;
                     }
                     else
@@ -35,15 +33,14 @@ namespace Question11FromHomework4
                 NameForCompare = personName;
                 upFirstName = NameForCompare[0].ToString().ToUpper() + NameForCompare.Substring(1);
 
-                return NameForCompare;
             }
             while (checkerFirstPerson == false);
+
+            return NameForCompare;
         }
 
         static int PersonAge()
         {
-            bool checkerFirstPerson = true;
-
             do
             {
                 string personAge = Convert.ToString(Console.ReadLine());
@@ -70,14 +67,14 @@ namespace Question11FromHomework4
                         checkerFirstPerson = true;
                     }
                 }
-                return personTryAge;
             }
             while (checkerFirstPerson == false);
+
+            return personTryAge;
         }
 
         public static string NameForCompare;
         public static string upFirstName;
-        public static string upSecondName;
         public static string sameAge = "same";
 
         static void Display(string getNameForFirst, int getAgeForFirst, string getNameForSecond, int getAgeForSecond)
@@ -136,6 +133,7 @@ namespace Question11FromHomework4
                         Console.WriteLine("No, they are not a same age ");
                     }
                 }
+
                 else
                 {
                     Console.WriteLine("You enter incorrect name, please enter valid name.");
