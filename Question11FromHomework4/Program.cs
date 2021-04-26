@@ -5,21 +5,20 @@ namespace Question11FromHomework4
     class Program
     {
 
-        public static int firstPersonTryAge;
+        public static int personTryAge;
         public static int secondPersonTryAge;
 
-        static void FirstPersonName()
+        static string PersonName()
         {
             bool checkerFirstPerson = true;
 
             do
             {
-                Console.Write("Enter first person name: ");
-                string firstPersonName = Convert.ToString(Console.ReadLine());
+                string personName = Convert.ToString(Console.ReadLine());
 
-                for (int i = 0; i < firstPersonName.Length; i++)
+                for (int i = 0; i < personName.Length; i++)
                 {
-                    char element = firstPersonName[i];
+                    char element = personName[i];
 
                     if (!Char.IsLetter(element))
                     {
@@ -32,27 +31,29 @@ namespace Question11FromHomework4
                         checkerFirstPerson = true;
                     }
                 }
-                firstNameForCompare = firstPersonName;
-                upFirstName = firstNameForCompare[0].ToString().ToUpper() + firstNameForCompare.Substring(1);
+
+                NameForCompare = personName;
+                upFirstName = NameForCompare[0].ToString().ToUpper() + NameForCompare.Substring(1);
+
+                return NameForCompare;
             }
             while (checkerFirstPerson == false);
         }
 
-        static void FirstPersonAge()
+        static int PersonAge()
         {
             bool checkerFirstPerson = true;
 
             do
             {
-                Console.Write("Enter first person age: ");
-                string firstPersonAge = Convert.ToString(Console.ReadLine());
-                bool firstAge = int.TryParse(firstPersonAge, out firstPersonTryAge);
+                string personAge = Convert.ToString(Console.ReadLine());
+                bool firstAge = int.TryParse(personAge, out personTryAge);
 
-                for (int i = 0; i < firstPersonAge.Length; i++)
+                for (int i = 0; i < personAge.Length; i++)
                 {
-                    char elementForFirstAge = firstPersonAge[i];
+                    char elementForFirstAge = personAge[i];
 
-                    if (firstPersonTryAge < 0)
+                    if (personTryAge < 0)
                     {
                         checkerFirstPerson = false;
                         Console.WriteLine("Age cannot be negativ number");
@@ -69,119 +70,52 @@ namespace Question11FromHomework4
                         checkerFirstPerson = true;
                     }
                 }
+                return personTryAge;
             }
             while (checkerFirstPerson == false);
         }
 
-        static void SecondPersonName()
-        {
-            bool checkerSecondPerson = true;
-
-            do
-            {
-                Console.Write("Enter second person name: ");
-                string secondPersonName = Convert.ToString(Console.ReadLine());
-
-                for (int i = 0; i < secondPersonName.Length; i++)
-                {
-                    char elementForSecondName = secondPersonName[i];
-
-                    if (!Char.IsLetter(elementForSecondName))
-                    {
-                        checkerSecondPerson = false;
-                        Console.WriteLine("Incorrect name type, please enter correct name\n");
-                        break;
-                    }
-                    else
-                    {
-                        checkerSecondPerson = true;
-                    }
-                }
-                secondNameForCompare = secondPersonName;
-                upSecondtName = secondNameForCompare[0].ToString().ToUpper() + secondNameForCompare.Substring(1);
-            }
-            while (checkerSecondPerson == false);
-        }
-
-        static void SecondPersonAge()
-        {
-            bool checkerSecondPerson = true;
-
-            do
-            {
-                Console.Write("Enter second person age: ");
-                string secondPersonAge = Convert.ToString(Console.ReadLine());
-                bool secondAge = int.TryParse(secondPersonAge, out secondPersonTryAge);
-
-                for (int i = 0; i < secondPersonAge.Length; i++)
-                {
-                    char elementForSecondAge = secondPersonAge[i];
-
-                    if (secondPersonTryAge < 0)
-                    {
-                        checkerSecondPerson = false;
-                        Console.WriteLine("Age cannot be negativ number");
-                        break;
-                    }
-                    else if (Char.IsLetter(elementForSecondAge))
-                    {
-                        checkerSecondPerson = false;
-                        Console.WriteLine("Incorrect age type, please enter correct age\n");
-                        break;
-                    }
-                    else
-                    {
-                        checkerSecondPerson = true;
-                    }
-                }
-            }
-            while (checkerSecondPerson == false);
-        }
-
-        public static string firstNameForCompare;
-        public static string secondNameForCompare;
+        public static string NameForCompare;
         public static string upFirstName;
-        public static string upSecondtName;
+        public static string upSecondName;
         public static string sameAge = "same";
 
-        static void Display()
+        static void Display(string getNameForFirst, int getAgeForFirst, string getNameForSecond, int getAgeForSecond)
         {
             bool ageComparing = true;
 
             do
             {
-                Console.Write($"Who is older {upFirstName}, {upSecondtName} or {sameAge}(if same, please type = same) ? Please enter name: ");
+                Console.Write($"Who is older {getNameForFirst}, {getNameForSecond} or {sameAge}(if same, please type = same) ? Please enter name: ");
                 string checkerForCompare = Convert.ToString(Console.ReadLine());
-                checkerForCompare = checkerForCompare[0].ToString().ToUpper() + checkerForCompare.Substring(1);
 
-                if (checkerForCompare == upFirstName)
+                if (checkerForCompare == getNameForFirst)
                 {
-                    if (firstPersonTryAge > secondPersonTryAge)
+                    if (getAgeForFirst > getAgeForSecond)
                     {
-                        Console.WriteLine($"{upFirstName} older than {upSecondtName} on {firstPersonTryAge - secondPersonTryAge} years");
+                        Console.WriteLine($"{getNameForFirst} older than {getNameForSecond} on {getAgeForFirst - getAgeForSecond} years");
                     }
-                    else if (firstPersonTryAge < secondPersonTryAge)
+                    else if (getAgeForFirst < getAgeForSecond)
                     {
-                        Console.WriteLine($"{upFirstName} not older than {upSecondtName}");
+                        Console.WriteLine($"{getNameForFirst} not older than {getNameForSecond}");
                     }
-                    else if (firstPersonTryAge == secondPersonTryAge)
+                    else if (getAgeForFirst == getAgeForSecond)
                     {
                         Console.WriteLine("No, they are the same age");
                     }
                 }
 
-                else if (checkerForCompare == upSecondtName)
+                else if (checkerForCompare == getNameForSecond)
                 {
-                    if (secondPersonTryAge > firstPersonTryAge)
+                    if (getAgeForSecond > getAgeForFirst)
                     {
-                        Console.WriteLine($"{upSecondtName} older than {upFirstName} on {secondPersonTryAge - firstPersonTryAge} years");
+                        Console.WriteLine($"{getNameForSecond} older than {getNameForFirst} on {getAgeForSecond - getAgeForFirst} years");
                     }
-                    else if (secondPersonTryAge < firstPersonTryAge)
+                    else if (getAgeForSecond < getAgeForFirst)
                     {
-
-                        Console.WriteLine($"{upSecondtName} not older than {upFirstName}");
+                        Console.WriteLine($"{getNameForSecond} not older than {getNameForFirst}");
                     }
-                    else if (firstPersonTryAge == secondPersonTryAge)
+                    else if (getAgeForFirst == getAgeForSecond)
                     {
                         Console.WriteLine("No, they are the same age");
                     }
@@ -189,15 +123,15 @@ namespace Question11FromHomework4
 
                 else if (checkerForCompare == sameAge)
                 {
-                    if (firstPersonTryAge == secondPersonTryAge)
+                    if (getAgeForFirst == getAgeForSecond)
                     {
                         Console.WriteLine("Yes, they are the same age ");
                     }
-                    else if (firstPersonTryAge > secondPersonTryAge)
+                    else if (getAgeForFirst > getAgeForSecond)
                     {
                         Console.WriteLine("No, they are not a same age ");
                     }
-                    else if (firstPersonTryAge < secondPersonTryAge)
+                    else if (getAgeForFirst < getAgeForSecond)
                     {
                         Console.WriteLine("No, they are not a same age ");
                     }
@@ -217,11 +151,19 @@ namespace Question11FromHomework4
             bool checkerForSwitchContinue = false;
             do
             {
-                FirstPersonName();
-                FirstPersonAge();
-                SecondPersonName();
-                SecondPersonAge();
-                Display();
+                Console.Write("Enter first person name: ");
+                string getNameForFirst = PersonName();
+
+                Console.Write("Enter first person age: ");
+                int getAgeForFirst = PersonAge();
+
+                Console.Write("Enter second person name: ");
+                string getNameForSecond = PersonName();
+
+                Console.Write("Enter second person age: ");
+                int getAgeForSecond = PersonAge();
+
+                Display(getNameForFirst, getAgeForFirst, getNameForSecond, getAgeForSecond);
 
                 Console.Write("\nWould you try again ? (Y/y) or (N/n): ");
 
